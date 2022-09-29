@@ -1,0 +1,14 @@
+{
+  "name": "@jakub21/maf",
+  "version": "1.0.0",
+  "description": "Modular Application Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jakub21",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}

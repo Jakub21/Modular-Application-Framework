@@ -1,0 +1,31 @@
+
+logger:
+  # enables console output
+  console: true
+  # enables colors in the console
+  console.colors: true
+  # separator for nested issuers
+  issuerSeparator: '/'
+  # entry format
+  # {time} - current time, {issuer} - log source, {message} - provided message
+  # {C_{color}} - change color, {C_reset} - reset color to the default
+  format: '{C_gray}[{time}]{C_reset} {C_cyan}<{issuer}>{C_reset} {message}'
+  # ASCII color codes (escape sequence is hardcoded for now)
+  colors: {
+    reset: '0m', gray: '90m', red: '91m', green: '92m', yellow: '93m',
+    blue: '94m', magenta: '95m', cyan: '96m', white: '97m'
+  }
+
+# config for the builtin modules
+builtin:
+  express:
+    # server port
+    port: 80
+    # express builtin middleware (enable flags)
+    # default parameters can be found at https://expressjs.com/en/api.html
+    # use builtin.express.{middleware}.params to overwrite them
+    json: false
+    raw: false
+    static: false
+    text: false
+    urlencoded: false

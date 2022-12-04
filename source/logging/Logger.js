@@ -12,8 +12,10 @@ module.exports = class Logger {
       this._streams.push(new ConsoleStream(this._config.get('console.colors')));
     }
   }
-  context(issuer) {
-    return new Context(this, issuer);
+  context(instance, issuer) {
+    let context = new Context(this, issuer);
+    instance.log = (...p) => {context.entry(...p)};
+    return context;
   }
   addStream(stream) {
     this._streams.push(stream);

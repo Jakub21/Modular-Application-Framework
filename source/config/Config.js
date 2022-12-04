@@ -10,8 +10,10 @@ module.exports = class MafConfig extends DataNest {
   constructor() {
     super();
   }
-  loadEnvironment(asKey) {
-    this.set(asKey, process.env);
+  loadEnv(variables=[], asKey='env') {
+    variables.map(name => {
+      this.set(`${asKey}.${name}`, process.env[name]);
+    });
   }
   // data loaders
   load(data, prefix='') {

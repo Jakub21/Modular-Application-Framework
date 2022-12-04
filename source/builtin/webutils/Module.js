@@ -1,16 +1,16 @@
 const fs = require('fs');
 const {Router} = require('express');
-const domi = require('@jakub21/domi');
+const webUtils = require('@jakub21/webutils');
 
 const {BuiltinModule} = require("../../MafModule");
 
-module.exports = class DomiServer extends BuiltinModule {
-  constructor(app, route='/lib/domi') {
-    super(app, 'domi', 'builtin');
+module.exports = class WebUtilsServer extends BuiltinModule {
+  constructor(app, route='/lib/webUtils') {
+    super(app, 'webUtils', 'builtin');
     this.EXPRESS_ROUTER = true;
     this.router = new Router();
     this.router.get(route, (req, resp) => {
-      fs.readFile(domi.path, 'utf-8', (err, data) => {
+      fs.readFile(webUtils.path, 'utf-8', (err, data) => {
         if (err) { resp.status(404).end(); return; }
         resp.header('Content-Type', 'text/javascript');
         resp.write(data);

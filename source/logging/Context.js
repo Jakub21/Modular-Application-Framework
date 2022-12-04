@@ -7,8 +7,10 @@ module.exports = class Context {
   entry(...message) {
     this.logger.entry(this.issuer, ...message);
   }
-  context(subIssuer) {
-    let sep = this.logger._config.get('issuerSeparator');
-    return new Context(this.logger, `${this.issuer}${sep}${subIssuer}`);
+  context(instance, subIssuer) {
+    let sep = '.';
+    let context = new Context(this.logger, `${this.issuer}${sep}${subIssuer}`);
+    instance.log = (...p) => {context.entry(...p)};
+    return context;
   }
 }

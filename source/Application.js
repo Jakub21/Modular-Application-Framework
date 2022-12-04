@@ -6,11 +6,10 @@ module.exports = class Application {
     this.config = config;
     this._setDefaults()
     this.logger = new Logger(this);
-    this._log = this.logger.context('core');
-    this._logBuiltin = this.logger.context('builtin');
-    this.log = (...p) => {this._log.entry(...p)};
+    this._log = this.logger.context(this, 'MAF');
     this.loaded = [];
   }
+
   module(filepath, ...args) {
     this.log(`Loading a module from '${filepath}'`);
     return this._load(path.dirname(require.main.filename), filepath, ...args);

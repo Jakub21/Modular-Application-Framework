@@ -1,3 +1,4 @@
+const rls = require('readline-sync');
 
 // Based on https://stackoverflow.com/a/18234317
 module.exports.strFormat = (str, data) => {
@@ -24,4 +25,8 @@ module.exports.formatTime = (date, sep=':') => {
 module.exports.getType = (value) => {
   try {return value.constructor;}
   catch {return null;} // null or undefined
+}
+
+module.exports.inputPassword = (prompt) => {
+  return rls.question(prompt, {hideEchoBack:true});
 }

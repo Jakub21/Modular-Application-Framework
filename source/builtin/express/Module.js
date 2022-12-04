@@ -1,4 +1,4 @@
-const MafModule = require("../../MafModule");
+const {BuiltinModule} = require("../../MafModule");
 const express = require('express');
 
 const MIDDLEWARE = {
@@ -13,7 +13,7 @@ const MIDDLEWARE = {
   },
 };
 
-module.exports = class ExpressServer extends MafModule {
+module.exports = class ExpressServer extends BuiltinModule {
   constructor(app) {
     super(app, 'express', 'builtin');
     let port = this._config.get('port');
@@ -34,7 +34,8 @@ module.exports = class ExpressServer extends MafModule {
   }
   acknowledge(other) {
     if (!other.EXPRESS_ROUTER) return;
-    this.log(`Using router from module ${other._fullName}`);
+    this.log(`Using router from module ${other._name}`);
     this.express.use(other.router);
+    other.onAcknowledged(this);
   }
 }

@@ -2,13 +2,21 @@
   "name": "@jakub21/maf",
   "version": "1.0.0",
   "description": "Modular Application Framework",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./example/index.js"
   },
   "author": "Jakub21",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "@jakub21/domi": "^1.0.10",
+    "@jakub21/shp": "^1.0.0",
+    "@jakub21/webutils": "^1.0.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "mongoose": "^6.7.2",
+    "nodemon": "^2.0.20",
+    "readline-sync": "^1.4.10",
+    "socket.io": "^4.5.3",
+    "yaml": "^2.1.3"
   }
 }

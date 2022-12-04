@@ -25,6 +25,21 @@ module.exports = class DataNest {
     Object.entries(data).map(([key, val]) => {other.set(key, val)});
     return other;
   }
+  toObject() {
+    // NOTE: Datanest are not completely compatible with plain objects so this loses some values
+    // See the note at the end of this file
+    let result = {};
+    for (let [key, val] of Object.entries(this._data)) {
+      let target = result;
+      for (let name of key.split('.').slice(0, -1)) {
+        let nextTarget = target[name];
+        if (nextTarget == undefined) {nextTarget = target[name] = {};}
+        target = nextTarget;
+      }
+      target[key.split('.').slice(-1)] = val;
+    }
+    return result;
+  }
   exists(path) {
     // Checks if path already exists
     return Object.keys(this._data).includes(path);

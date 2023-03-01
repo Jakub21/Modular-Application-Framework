@@ -14,7 +14,7 @@ module.exports = class Logger {
   }
   context(instance, issuer) {
     let context = new Context(this, issuer);
-    instance.log = (...p) => {context.entry(...p)};
+    instance.log = (...message) => {context.entry(...message)};
     return context;
   }
   addStream(stream) {

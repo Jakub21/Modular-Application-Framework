@@ -4,6 +4,7 @@ class MafModule {
     this.app = app;
     this._name = name;
     this._log = this.app.logger.context(this, this._name);
+    this.log = (...message) => {}; // function created by the logger
     this._config = this.app.config.subnest(this._log.issuer);
   }
   acknowledge(other) {

@@ -7,6 +7,7 @@ module.exports = class Application {
     this._setDefaults()
     this.logger = new Logger(this);
     this._log = this.logger.context(this, 'MAF');
+    this.log = (...message) => {}; // function created by the logger
     this.loaded = [];
   }
 

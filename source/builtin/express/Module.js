@@ -35,7 +35,11 @@ module.exports = class ExpressServer extends BuiltinModule {
   acknowledge(other) {
     if (!other.EXPRESS_ROUTER) return;
     this.log(`Using router from module ${other._name}`);
-    this.express.use(other.router);
+    if (other.ROUTE_NAME) {
+      this.express.use(other.ROUTE_NAME, other.router);
+    } else {
+      this.express.use(other.router);
+    }
     other.onAcknowledged(this);
   }
 }

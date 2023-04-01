@@ -1,5 +1,5 @@
 const path = require('path');
-const Logger = require('./logging/Logger');
+const Logger = require('../logging/Logger');
 
 module.exports = class Application {
   constructor(config) {

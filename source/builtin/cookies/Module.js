@@ -1,15 +1,20 @@
 const { Router } = require('express');
-const Cookies = require('./Cookies');
+
 const {BuiltinModule} = require("../../core/MafModule");
+const Event = require("../../core/Event");
+const Cookies = require('./Cookies');
 
 module.exports = class CookiesModule extends BuiltinModule {
   constructor(app, prefix) {
     super(app, 'cookies', 'builtin');
-    this.EXPRESS_ROUTER = true;
     this.router = Router();
     this.router.all('*', (req, resp, next) => {
       req.cookies = new Cookies(req, prefix);
       next();
     });
+    this.emit(new Event('ExpressRouter', {
+      routeName: '',
+      router: this.router,
+    }));
   }
 }

@@ -6,8 +6,8 @@ module.exports = class Application {
     this.config = config;
     this._setDefaults()
     this.logger = new Logger(this);
-    this._log = this.logger.context(this, 'MAF');
     this.log = (...message) => {}; // function created by the logger
+    this._log = this.logger.context(this, 'MAF');
     this.loaded = [];
     this.queue = [];
   }
@@ -33,7 +33,7 @@ module.exports = class Application {
     this.config.underLoadFile(filepath);
   }
   start() {
-    setInterval(() => {this._handle_events();}, 10);
+    setInterval(() => {this._handle_events();}, 5);
   }
   _handle_events() {
     while (this.queue.length) {

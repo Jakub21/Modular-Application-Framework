@@ -4,8 +4,8 @@ class MafModule {
     this.app = app;
     this._name = name;
     this._handlers = {};
-    this._log = this.app.logger.context(this, this._name);
     this.log = (...message) => {}; // function created by the logger
+    this._log = this.app.logger.context(this, this._name);
     this._config = this.app.config.subnest(this._log.issuer);
   }
   emit(event) {

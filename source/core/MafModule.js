@@ -3,17 +3,21 @@ class MafModule {
   constructor(app, name) {
     this.app = app;
     this._name = name;
+    this._handlers = {};
     this._log = this.app.logger.context(this, this._name);
     this.log = (...message) => {}; // function created by the logger
     this._config = this.app.config.subnest(this._log.issuer);
   }
-  acknowledge(other) {
-    // this method can be used for integration between modules
-    // when other is loaded, this can take some action
+  emit(event) {
+    event.assign(this);
+    this.app.register(event);
   }
-  onAcknowledged(by) {
-    // can be called by a module that acknowledges this one
-    // (passes itself as "by")
+  addHandler(key, callback) {
+    this._handlers[key] = callback;
+  }
+  handle(event) {
+    if (!Object.keys(this._handlers).includes(event.key)) return;
+    this._handlers[event.key](event);
   }
 }
 

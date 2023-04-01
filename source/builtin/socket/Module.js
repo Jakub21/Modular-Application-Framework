@@ -1,4 +1,4 @@
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 const { Server:SocketIO } = require("socket.io");
 const http = require('http');
 
@@ -11,19 +11,15 @@ module.exports = class SocketServer extends BuiltinModule {
     this.io.on('connection', socket => {
       this._setupNewSocket(socket);
     });
-  }
-  acknowledge(other) {
-    if (!other.SOCKET_NODES) return;
-    this.log(`Using nodes from module ${other._name}`);
-    for (let [route, callback] of Object.entries(other.nodes)) {
-      if (route == 'connection') {
-        this._onConnection.push(callback);
-        continue;
+    this.addHandler('SocketNode', event => {
+      this.log('Adding socket node', event.data.route);
+      if (event.data.route == 'connection') {
+        this._onConnection.push(event.data.callback);
+        return;
       }
-      if (this._nodes[route] == undefined) this._nodes[route] = [];
-      this._nodes[route].push(callback);
-    }
-    other.onAcknowledged(this);
+      if (this._nodes[event.data.route] == undefined) this._nodes[event.data.route] = [];
+      this._nodes[event.data.route].push(event.data.callback);
+    });
   }
   _setupNewSocket(socket) {
     this._onConnection.map(cb=>{cb(socket)});

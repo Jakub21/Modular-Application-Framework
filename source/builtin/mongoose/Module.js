@@ -1,13 +1,17 @@
 const { config } = require('dotenv');
 const mongoose = require('mongoose');
 
-const { BuiltinModule } = require("../../MafModule");
+const { BuiltinModule } = require("../../core/MafModule");
 const { strFormat, inputPassword } = require('../../util');
 
 module.exports = class Mongoose extends BuiltinModule {
   constructor(app) {
     super(app, 'mongoose');
     this.models = {};
+    this.addHandler('MongooseSchema', event => {
+      this.log(`Using schema from ${event.emitter._name}`);
+      this.addSchema(event.data.schemaName, event.data.schema);
+    });
   }
   async connect() {
     this.log('Connecting...');
@@ -21,14 +25,6 @@ module.exports = class Mongoose extends BuiltinModule {
     let model = mongoose.model(name, schema);
     console.log('model', model);
     this.models[name] = model;
-  }
-  acknowledge(other) {
-    if (!other.MONGOOSE_SCHEMAS) return;
-    this.log(`Using schemas from module ${other._name}`);
-    for (let [name, schema] of Object.entries(other.schemas)) {
-      this.addSchema(name, schema);
-    }
-    other.onAcknowledged(this);
   }
   generateURI() {
     let URI = this._config.get('URI');

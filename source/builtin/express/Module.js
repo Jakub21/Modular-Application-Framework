@@ -1,4 +1,4 @@
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 const express = require('express');
 
 const MIDDLEWARE = {
@@ -21,6 +21,10 @@ module.exports = class ExpressServer extends BuiltinModule {
     this.express = express();
     this._server = this.express.listen(port);
     this._setupMiddleware();
+    this.addHandler('ExpressRouter', event => {
+      this.log(`Using router from ${event.emitter._name}`);
+      this.express.use(event.data.routeName, event.data.router);
+    });
   }
   _setupMiddleware() {
     for (let [key, mw] of Object.entries(MIDDLEWARE)) {
@@ -31,15 +35,5 @@ module.exports = class ExpressServer extends BuiltinModule {
         this.express.use(mw(params));
       }
     }
-  }
-  acknowledge(other) {
-    if (!other.EXPRESS_ROUTER) return;
-    this.log(`Using router from module ${other._name}`);
-    if (other.ROUTE_NAME) {
-      this.express.use(other.ROUTE_NAME, other.router);
-    } else {
-      this.express.use(other.router);
-    }
-    other.onAcknowledged(this);
   }
 }

@@ -1,4 +1,4 @@
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 const express = require('express');
 
 const MIDDLEWARE = {

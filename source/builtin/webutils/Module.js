@@ -2,7 +2,7 @@ const fs = require('fs');
 const {Router} = require('express');
 const webUtils = require('@jakub21/webutils');
 
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 
 module.exports = class WebUtilsServer extends BuiltinModule {
   constructor(app, route='/lib/webUtils') {

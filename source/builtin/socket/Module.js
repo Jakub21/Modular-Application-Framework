@@ -1,4 +1,4 @@
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 const { Server:SocketIO } = require("socket.io");
 const http = require('http');
 

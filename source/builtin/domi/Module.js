@@ -2,7 +2,7 @@ const fs = require('fs');
 const {Router} = require('express');
 const domi = require('@jakub21/domi');
 
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 
 module.exports = class DomiServer extends BuiltinModule {
   constructor(app, route='/lib/domi') {

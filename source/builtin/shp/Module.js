@@ -2,7 +2,7 @@ const fs = require('fs');
 const {Router} = require('express');
 const shp = require('@jakub21/shp');
 
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 
 module.exports = class ShpServer extends BuiltinModule {
   constructor(app, route='/lib/shp') {

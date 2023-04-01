@@ -1,7 +1,7 @@
 const { config } = require('dotenv');
 const mongoose = require('mongoose');
 
-const { BuiltinModule } = require("../../MafModule");
+const { BuiltinModule } = require("../../core/MafModule");
 const { strFormat, inputPassword } = require('../../util');
 
 module.exports = class Mongoose extends BuiltinModule {

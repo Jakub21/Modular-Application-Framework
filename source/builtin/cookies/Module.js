@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const Cookies = require('./Cookies');
-const {BuiltinModule} = require("../../MafModule");
+const {BuiltinModule} = require("../../core/MafModule");
 
 module.exports = class CookiesModule extends BuiltinModule {
   constructor(app, prefix) {

@@ -1,5 +1,6 @@
 const path = require('path');
 const Logger = require('../logging/Logger');
+const Event = require('./Event');
 
 module.exports = class Application {
   constructor(config) {
@@ -33,6 +34,10 @@ module.exports = class Application {
     this.config.underLoadFile(filepath);
   }
   start() {
+    this._handle_events();
+    this.register(new Event('AppStart'));
+    this._handle_events();
+    this.log('Started\n');
     setInterval(() => {this._handle_events();}, 5);
   }
   _handle_events() {

@@ -1,6 +1,6 @@
 
 module.exports = class Event {
-  constructor(key, data) {
+  constructor(key, data={}) {
     this.key = key;
     this.data = data;
     this.emitter = undefined;

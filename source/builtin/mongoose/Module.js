@@ -2,6 +2,7 @@ const { config } = require('dotenv');
 const mongoose = require('mongoose');
 
 const { BuiltinModule } = require("../../core/MafModule");
+const Event = require("../../core/Event");
 const { strFormat, inputPassword } = require('../../util');
 
 module.exports = class Mongoose extends BuiltinModule {
@@ -11,6 +12,9 @@ module.exports = class Mongoose extends BuiltinModule {
     this.addHandler('MongooseSchema', event => {
       this.log(`Using schema from ${event.emitter._name}`);
       this.addSchema(event.data.schemaName, event.data.schema);
+    });
+    this.addHandler('AppStart', event => {
+      this.emit(new Event('MongooseStart', {models: this.models}));
     });
   }
   async connect() {
@@ -23,7 +27,6 @@ module.exports = class Mongoose extends BuiltinModule {
     let schema = new mongoose.Schema(data);
     this.log('Adding schema', name);
     let model = mongoose.model(name, schema);
-    console.log('model', model);
     this.models[name] = model;
   }
   generateURI() {

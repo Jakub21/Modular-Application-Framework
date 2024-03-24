@@ -1,10 +1,10 @@
-const { Router } = require('express');
+import { Router } from 'express';
 
-const {BuiltinModule} = require("../../core/MafModule");
-const Event = require("../../core/Event");
-const Cookies = require('./Cookies');
+import { BuiltinModule } from "../../core/MafModule.js";
+import Event from "../../core/Event.js";
+import Cookies from './Cookies.js';
 
-module.exports = class CookiesModule extends BuiltinModule {
+export default class CookiesModule extends BuiltinModule {
   constructor(app, prefix) {
     super(app, 'cookies', 'builtin');
     this.router = Router();

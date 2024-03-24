@@ -1,5 +1,5 @@
 
-module.exports = class Event {
+export default class Event {
   constructor(key, data={}) {
     this.key = key;
     this.data = data;

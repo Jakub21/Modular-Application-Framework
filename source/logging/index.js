@@ -1,5 +1,3 @@
 
-module.exports = {
-  Logger: require('./Logger.js'),
-  streams: require('./Stream.js'),
-}
+export {default as Logger} from './Logger.js';
+export * as streams from './Stream.js';

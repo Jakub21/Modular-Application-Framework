@@ -1,5 +1,5 @@
 
-module.exports = class DataNest {
+export default class DataNest {
   constructor() {
     this._data = {};
   }

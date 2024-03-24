@@ -1,7 +1,7 @@
-const path = require('path');
-const fs = require('fs');
-const {formatDate, strFormat} = require('../util');
-const { format } = require('path');
+import { dirname } from 'path';
+import { existsSync, mkdirSync, createWriteStream } from 'fs';
+import { formatDate, strFormat } from '../util.js';
+import { format } from 'path';
 
 class LoggerStream {
   constructor(stream, useColors) {
@@ -14,20 +14,20 @@ class LoggerStream {
   close() {}
 }
 
-module.exports.ConsoleStream = class ConsoleStream extends LoggerStream {
+export class ConsoleStream extends LoggerStream {
   constructor(useColors=true) {
     super(process.stdout, useColors);
   }
 }
 
-module.exports.FileStream = class FileStream extends LoggerStream {
+export class FileStream extends LoggerStream {
   constructor(app, filename, useColors=false) {
     filename = strFormat(filename, {today: formatDate(new Date())});
-    let dir = path.dirname(filename);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+    let dir = dirname(filename);
+    if (!existsSync(dir)) {
+      mkdirSync(dir, { recursive: true });
     }
-    super(fs.createWriteStream(filename, {flags:'a'}), useColors);
+    super(createWriteStream(filename, {flags:'a'}), useColors);
     this.writeNewSession();
     this.filename = filename;
   }

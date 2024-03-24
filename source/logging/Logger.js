@@ -1,8 +1,8 @@
-const {ConsoleStream, FileStream} = require('./Stream');
-const Context = require('./Context');
-const {formatTime, strFormat} = require('../util');
+import { ConsoleStream, FileStream } from './Stream.js';
+import Context from './Context.js';
+import { formatTime, strFormat } from '../util.js';
 
-module.exports = class Logger {
+export default class Logger {
   constructor(app) {
     this._app = app;
     this._config = app.config.subnest('logger');

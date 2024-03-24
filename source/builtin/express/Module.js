@@ -1,19 +1,20 @@
-const {BuiltinModule} = require("../../core/MafModule");
-const express = require('express');
+import { BuiltinModule } from "../../core/MafModule.js";
+import * as exp from 'express';
+import express from 'express';
 
 const MIDDLEWARE = {
-  json: express.json,
-  raw: express.raw,
-  text: express.text,
-  urlencoded: express.urlencoded,
+  json: exp.json,
+  raw: exp.raw,
+  text: exp.text,
+  urlencoded: exp.urlencoded,
   static: (params) => {
     let root = params.root;
     delete params.root;
-    return express.static(root, params);
+    return exp.static(root, params);
   },
 };
 
-module.exports = class ExpressServer extends BuiltinModule {
+export default class ExpressServer extends BuiltinModule {
   constructor(app) {
     super(app, 'express', 'builtin');
     let port = this._config.get('port');

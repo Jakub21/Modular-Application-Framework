@@ -1,5 +1,5 @@
 
-module.exports = class Cookies {
+export default class Cookies {
   constructor(req, prefix) {
     this.prefix = prefix;
     let raw = req.headers.cookie;

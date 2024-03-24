@@ -1,16 +1,16 @@
-const fs = require('fs');
-const {Router} = require('express');
-const webUtils = require('@jakub21/webutils');
+import { readFile } from 'fs';
+import { Router } from 'express';
+import { path } from '@jakub21/webutils';
 
-const {BuiltinModule} = require("../../core/MafModule");
-const Event = require("../../core/Event");
+import { BuiltinModule } from "../../core/MafModule.js";
+import Event from "../../core/Event.js";
 
-module.exports = class WebUtilsServer extends BuiltinModule {
+export default class WebUtilsServer extends BuiltinModule {
   constructor(app, route='/lib/webUtils') {
     super(app, 'webUtils', 'builtin');
     this.router = new Router();
     this.router.get(route, (req, resp) => {
-      fs.readFile(webUtils.path, 'utf-8', (err, data) => {
+      readFile(path, 'utf-8', (err, data) => {
         if (err) { resp.status(404).end(); return; }
         resp.header('Content-Type', 'text/javascript');
         resp.write(data);

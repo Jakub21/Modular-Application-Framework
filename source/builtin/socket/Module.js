@@ -1,8 +1,8 @@
-const {BuiltinModule} = require("../../core/MafModule");
-const { Server:SocketIO } = require("socket.io");
-const http = require('http');
+import { BuiltinModule } from "../../core/MafModule.js";
+import { Server as SocketIO } from "socket.io";
+import http from 'http';
 
-module.exports = class SocketServer extends BuiltinModule {
+export default class SocketServer extends BuiltinModule {
   constructor(app, express) {
     super(app, 'socket', 'builtin');
     this._onConnection = [];

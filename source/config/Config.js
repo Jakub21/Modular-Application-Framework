@@ -1,12 +1,12 @@
-require('dotenv/config');
-const YAML = require('yaml');
-const fs = require('fs');
-const DataNest = require('./DataNest.js');
-const {getType} = require('../util');
+import 'dotenv/config';
+import { parse } from 'yaml';
+import { readFileSync } from 'fs';
+import DataNest from './DataNest.js';
+import { getType } from '../util.js';
 
 const PRIMITIVES = [Boolean, Number, String, Array, null];
 
-module.exports = class MafConfig extends DataNest {
+export default class Config extends DataNest {
   constructor() {
     super();
   }
@@ -39,7 +39,7 @@ module.exports = class MafConfig extends DataNest {
     this.underLoad(this._loadFile(path));
   }
   _loadFile(path) {
-    return YAML.parse(fs.readFileSync(path, 'utf-8'));
+    return parse(readFileSync(path, 'utf-8'));
     // TODO: Validate
   }
 }

@@ -1,16 +1,16 @@
-const fs = require('fs');
-const {Router} = require('express');
-const shp = require('@jakub21/shp');
+import { readFile } from 'fs';
+import { Router } from 'express';
+import { path } from '@jakub21/shp';
 
-const {BuiltinModule} = require("../../core/MafModule");
-const Event = require("../../core/Event");
+import { BuiltinModule } from "../../core/MafModule.js";
+import Event from "../../core/Event.js";
 
-module.exports = class ShpServer extends BuiltinModule {
+export default class ShpServer extends BuiltinModule {
   constructor(app, route='/lib/shp') {
     super(app, 'shp', 'builtin');
     this.router = new Router();
     this.router.get(route, (req, resp) => {
-      fs.readFile(shp.path, 'utf-8', (err, data) => {
+      readFile(path, 'utf-8', (err, data) => {
         if (err) { resp.status(404).end(); return; }
         resp.header('Content-Type', 'text/javascript');
         resp.write(data);

@@ -1,11 +1,12 @@
 {
   "name": "@jakub21/maf",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Modular Application Framework",
   "scripts": {
     "test": "node ./example/index.js"
   },
   "author": "Jakub21",
+  "type": "module",
   "license": "ISC",
   "dependencies": {
     "@jakub21/domi": "^1.0.10",

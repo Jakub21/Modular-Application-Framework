@@ -1,9 +1,7 @@
 // Module root
 
-module.exports = {
-  Config: require('./source/config/Config.js'),
-  Application: require('./source/core/Application.js'),
-  MafModule: require('./source/core/MafModule.js').MafModule,
-  Event: require('./source/core/Event.js'),
-  logging: require('./source/logging'),
-};
+export {default as Config} from './source/config/Config.js';
+export {default as Application} from './source/core/Application.js';
+export {MafModule} from './source/core/MafModule.js';
+export {default as Event} from './source/core/Event.js';
+export * as logging from './source/logging/index.js';

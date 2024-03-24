@@ -1,5 +1,5 @@
 
-module.exports = class Context {
+export default class Context {
   constructor(logger, issuer) {
     this.logger = logger;
     this.issuer = issuer;

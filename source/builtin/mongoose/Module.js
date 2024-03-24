@@ -1,11 +1,11 @@
-const { config } = require('dotenv');
-const mongoose = require('mongoose');
+import { config } from 'dotenv';
+import { connect as _connect, Schema, model as _model } from 'mongoose';
 
-const { BuiltinModule } = require("../../core/MafModule");
-const Event = require("../../core/Event");
-const { strFormat, inputPassword } = require('../../util');
+import { BuiltinModule } from "../../core/MafModule.js";
+import Event from "../../core/Event.js";
+import { strFormat, inputPassword } from '../../util.js';
 
-module.exports = class Mongoose extends BuiltinModule {
+export default class Mongoose extends BuiltinModule {
   constructor(app) {
     super(app, 'mongoose');
     this.models = {};
@@ -20,13 +20,13 @@ module.exports = class Mongoose extends BuiltinModule {
   async connect() {
     this.log('Connecting...');
     let options = this._config.subnest('connectOptions').toObject();
-    this.connection = await mongoose.connect(this.generateURI(), options);
+    this.connection = await _connect(this.generateURI(), options);
     this.log('Connected');
   }
   addSchema(name, data) {
-    let schema = new mongoose.Schema(data);
+    let schema = new Schema(data);
     this.log('Adding schema', name);
-    let model = mongoose.model(name, schema);
+    let model = _model(name, schema);
     this.models[name] = model;
   }
   generateURI() {
@@ -39,6 +39,6 @@ module.exports = class Mongoose extends BuiltinModule {
     return strFormat(URI, {password});
   }
   getTypes() {
-    return mongoose.Schema.Types;
+    return Schema.Types;
   }
 }
